@@ -1,0 +1,211 @@
+#include<stdio.h>
+
+int add(int a, int b);
+int sub(int a, int b);
+int mul(int a, int b);
+double div(int a, int b);
+int comp(int a, int b);
+long long fact(int n);
+int gcd(int a, int b);
+void fib(int n);
+int rev(int n);
+
+int main(){
+int choice;
+int a,b,n;
+int running = 1;
+
+while(running){
+    printf("\n....Simple Calculator....\n");
+
+    printf("1. Addition\n");
+    printf("2. Subtraction\n");
+    printf("3. Multiplication\n");
+    printf("4. Division\n");
+    printf("5. Comparison between two numbers\n");
+    printf("6. Factorial of a number\n");
+    printf("7. GCD of two numbers\n");
+    printf("8. Fibonacci Series\n");
+    printf("9. Reverse a number\n");
+    printf("0. Exit\n");
+
+    printf("\nEnter your choice: ");
+    if (scanf("%d",&choice) !=1){
+        printf("Invalid input");
+        break ;
+    }
+
+switch (choice){
+
+
+case 1: //Addition
+    printf("Enter two integers:  ");
+    scanf("%d%d", &a, &b);
+
+    printf("Addition is: %d\n", add(a,b));
+    break;
+
+case 2: //Subtraction
+    printf("Enter two integers:  ");
+    scanf("%d%d", &a, &b);
+
+    printf("Subtraction is: %d\n", sub(a,b));
+    break;
+
+case 3: // Multiplication
+    printf("Enter two integers:  ");
+    scanf("%d%d", &a, &b);
+
+    printf(" Multiplication is: %d\n", mul(a,b));
+    break;
+
+case 4: //Divisiion
+    printf("Enter two integers(dividend divisor):  ");
+    scanf("%d%d", &a, &b);
+    if (b==0){
+        printf("Error: Division by 0 is not allowed");
+    }
+    else{
+    printf("Division is: %d\n", div(a,b));
+    }
+    break;
+
+case 5: //Comparision
+    printf("Enter two integers:  ");
+    scanf("%d%d", &a, &b);
+    if (comp(a,b)==0){
+        printf("%d and %d are equal\n", a,b);
+    }
+    else if  (comp(a,b)>0) {
+    printf("%d is greater than %d\n", a,b);
+    }
+    else {
+        printf("%d is smaller than %d\n", a,b);
+    }
+    break;
+
+
+case 6: //Factorial
+    printf("Enter a non- negative integer:  ");
+    scanf("%d", &n);
+    if (n<0){
+        printf("Error: Factorial of negative number is not allowed\n");
+    }
+    else{
+    printf("Factorial of %d is: %lld\n", n, fact(n));
+    }
+    break;
+
+
+case 7: //GCD
+    printf("Enter two integers:  ");
+    scanf("%d%d", &a, &b);
+    if (a==0 && b==0){
+        printf("Error: GCD(0,0) is not defined\n");
+    }
+    else{
+    printf("GCD of %d and %d is: %d\n", a,b, gcd(a,b));
+    }
+    break;
+
+case 8: //Fibonacci
+    printf("Enter your number (positive integer):  ");
+    scanf("%d", &n);
+    if (n<=0){
+        printf("Error: Number of terms must be positive\n");
+    }
+    else{
+    printf("Fibonacci (%d terms): \n", n);
+    fib(n);
+    }
+    break;
+
+case 9: //Reverse
+    printf("Enter an integer:  ");
+    scanf("%d", &n);
+    printf("Reverse of %d: %d\n", n, rev(n));
+    break;
+
+case 0: //Exit
+    running == 0;
+    printf("Exiting...See you another time\n");
+    break;
+
+default :
+    printf("Invalid choice...please select again from the menu\n");
+}
+}
+return 0;
+}
+
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int sub(int a, int b) {
+    return a - b;
+}
+
+int mul(int a, int b) {
+    return a * b;
+}
+
+double div(int a, int b) {
+    return a / b;
+}
+
+int comp(int a, int b) {
+    if (a == b) return 0;
+    else if (a > b) return 1;
+    else return -1;
+}
+
+long long fact(int n) {
+    long long result = 1;
+    int i;
+    for (i = 1; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+int gcd(int a, int b) {
+    int temp;
+    if (a < 0) a = -a;
+    if (b < 0) b = -b;
+
+    while (b != 0) {
+        temp = a % b;
+        a = b;
+        b = temp;
+    }
+    return a;
+}
+
+void fib(int n) {
+    int i;
+    long long a = 0, b = 1, next;
+
+    for (i = 1; i <= n; i++) {
+        printf("%lld ", a);
+        next = a + b;
+        a = b;
+        b = next;
+    }
+}
+
+int rev(int n) {
+    int rev = 0, sign = 1;
+
+    if (n < 0) {
+        sign = -1;
+        n = -n;
+    }
+
+    while (n != 0) {
+        rev = rev * 10 + (n % 10);
+        n /= 10;
+    }
+    return sign * rev;
+}
